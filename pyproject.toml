@@ -6,7 +6,10 @@ authors = ["Victor Willian <victorwillian1012@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = ">=3.12,<3.13"
+numpy = "^1.26.1"
+matplotlib = "^3.8.1"
+black = {version = "22.1.0", extras = ["jupyter"]}
 
 
 [tool.poetry.group.dev.dependencies]
