@@ -1,0 +1,13 @@
+site_name: Projeto machine learning
+repo_url: https://github.com/V1ctorW1ll1an/LearningDataScience
+repo_name: V1ctorW1ll1an/LearningDataScience
+edit_uri: tree/main/docs
+
+theme:
+    name: material
+    language: pt-BR
+
+markdown_extensions:
+    - attr_list
+extra_css:
+    - stylesheets/extra.css
