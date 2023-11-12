@@ -1,7 +1,8 @@
 import math
-from typing import List
+from typing import Callable, List, Tuple
 
 Vector = List[float]
+Matrix = List[List[float]]
 
 
 def add(v: Vector, w: Vector) -> Vector:
@@ -106,3 +107,60 @@ def squared_distance(v: Vector, w: Vector) -> float:
 
 def distance(v: Vector, w: Vector) -> float:
     return math.sqrt(squared_distance(v, w))
+
+
+# Matrix
+
+
+def shape(A: Matrix) -> Tuple[int, int]:
+    """
+    Retorna (n˚ de linhas de Am n˚ de colunas de A)
+
+    >>> shape([[1, 2, 3], [4, 5, 6]])
+    (2, 3)
+    """
+    num_rows = len(A)
+    num_cols = len(A[0]) if A else 0  # numero de elementos da primeira linha
+    return num_rows, num_cols
+
+
+def get_row(A: Matrix, i: int) -> Vector:
+    """
+    Retorna a linha i de A (como um vetor)
+    """
+    return A[i]  # A[i] já está na linha i
+
+
+def get_col(A: Matrix, j: int) -> Vector:
+    """
+    Retorna a coluna j de A (como um vetor)
+    """
+    return [
+        A_i[j] for A_i in A  # elemento j da linha A_i
+    ]     # para cada linha A_i
+
+
+def make_matrix(
+    num_rows: int, num_cols: int, entry_fn: Callable[[int, int], float]
+) -> Matrix:
+    """
+    Retorna uma matriz num_rows x num_cols
+    cuja entrada (i,j) é entry_fn(i,j)
+    """
+
+    return [
+        [
+            entry_fn(i, j) for j in range(num_cols)  # com i, crie uma lista
+        ]  # [entry_fn(i,0), ...]
+        for i in range(num_rows)
+    ]         # crie uma lista para cada i
+
+
+def identity_matrix(n: int) -> Matrix:
+    """
+    Retorna uma matriz identidade n x n
+
+    >>> identity_matrix(3)
+    [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+    """
+    return make_matrix(n, n, lambda i, j: 1 if i == j else 0)
